@@ -1,42 +1,46 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "~/layouts/Layout.astro";
 import ShimmerBackground from "~/components/shimmer-background.tsx";
-import { Image } from "astro:assets";
 import HermesSend from "~/assets/hermessend.png";
 import DevGenius from "~/assets/devgenius.png";
 import RapidBart from "~/assets/rapidbart.png";
+import BentoGrid from "~/components/bento-grid.tsx";
+import Avatar from "~/assets/profile.jpg";
 ---
 
 <Layout title="Brayan M. Cuenca | Full-Stack Web Developer">
-  <div class="fixed inset-0 -z-10" role="presentation" aria-hidden="true">
     <ShimmerBackground client:load />
-  </div>
 
   <section
-    class="flex min-h-[calc(80vh-4rem)] flex-col justify-center p-2 md:p-3"
+    class="mb-4 flex min-h-[calc(80vh-4rem)] flex-col justify-center rounded-2xl bg-transparent p-2 md:p-3"
     transition:name="fade"
     aria-labelledby="hero-heading"
   >
-    <div class="space-y-6 sm:space-y-8">
-      <header class="space-y-4 bg-transparent backdrop-blur-2xl">
+    <div class="space-y-6 text-center sm:space-y-8">
+      <header class="space-y-4 flex flex-col items-center">
+        <Image
+          src={Avatar}
+          alt="A photo of Brayan Mejia Cuenca"
+          class="w-24 h-24 rounded-full shadow-lg object-cover"
+        />
         <h1
           id="hero-heading"
-          class="font-[Tobias] text-lg text-neutral-400 text-shadow-md sm:text-xl lg:text-2xl"
+          class="font-[Tobias] text-2xl text-neutral-600 md:text-xl lg:text-4xl"
         >
           Brayan Mejia Cuenca
         </h1>
 
         <p
-          class="max-w-sm text-base leading-relaxed text-neutral-300 text-shadow-lg sm:max-w-2xl sm:text-lg lg:max-w-3xl lg:text-xl"
+          class="max-w-sm text-base leading-relaxed text-neutral-400 sm:max-w-2xl sm:text-lg lg:max-w-3xl lg:text-xl"
         >
           Self-taught software engineer based in the San Francisco Bay Area.
           Currently working at the intersection of AI, security, UI design, and
           advancing my skills in web development.
         </p>
       </header>
-
       <nav
-        class="text-primary flex items-center gap-6"
+        class="text-primary flex items-center justify-center gap-6"
         aria-label="Social media links"
       >
         <a
@@ -129,89 +133,23 @@ import RapidBart from "~/assets/rapidbart.png";
       </nav>
     </div>
   </section>
+
   <section
-    class="mb-2 flex h-full w-full flex-col items-center justify-center rounded-2xl"
+    class="mb-2 flex h-full w-full flex-col items-center justify-center relative"
   >
-    <div
-      class="grid w-full max-w-[1328px] grid-flow-dense grid-cols-12 gap-4 rounded-2xl p-2 ring ring-white/10 xl:auto-rows-fr"
-    >
-      <section
-        class="@container/section col-span-full flex flex-col gap-2 rounded-2xl bg-transparent p-2 ring ring-white/10 backdrop-blur-2xl md:col-span-6 xl:row-span-4"
+    <!-- Section Header -->
+    <div class="mb-8 px-4 text-center">
+      <h2
+        class="mb-3 font-[Tobias] text-2xl text-neutral-600 sm:text-3xl lg:text-4xl"
       >
-        <div class="flex flex-1 flex-col gap-4 p-6">
-          <h3
-            class="flex flex-col gap-4 font-semibold @[17.5rem]:flex-row @[17.5rem]:items-center"
-          >
-            DevGenius
-          </h3>
-          <p class="max-w-prose text-white">
-            DevGenius Creates SEO-optimized technical content and publish to
-            Dev.to in minutes.
-          </p>
-        </div>
-        <div
-          class="flex aspect-[100/66] items-end justify-center overflow-hidden rounded-md p-0 ring ring-white/10 md:aspect-square xl:aspect-[640/376]"
-        >
-          <Image
-            src={DevGenius}
-            alt="Dev Genius"
-            class="h-full w-full object-none object-[center_1rem]"
-            width={468}
-            height={376}
-            quality={95}
-            format="webp"
-            densities={[1, 2]}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            placeholder="blur"
-          />
-        </div>
-      </section>
-      <section
-        class="@container/section col-span-full flex flex-col gap-2 rounded-2xl bg-transparent p-2 ring ring-white/10 backdrop-blur-2xl md:col-span-6 xl:row-span-4"
-      >
-        <div class="flex flex-1 flex-col gap-4 p-6">
-          <h3
-            class="flex flex-col gap-4 font-semibold @[17.5rem]:flex-row @[17.5rem]:items-center"
-          >
-            Hermes Send
-          </h3>
-          <p class="max-w-prose text-white">
-            I've worked on a variety of projects, from small personal projects
-            to large-scale enterprise applications.
-          </p>
-        </div>
-        <div
-          class="flex aspect-[100/66] items-end justify-center overflow-hidden rounded-md p-0 ring ring-white/10 md:aspect-square xl:aspect-[640/376]"
-        >
-          <Image
-            src={HermesSend}
-            alt="Hermes Send"
-            class="h-full w-full object-none object-[center_1rem]"
-            width={468}
-            height={376}
-            quality={95}
-            format="webp"
-            densities={[1, 2]}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            placeholder="blur"
-          />
-        </div>
-      </section>
+        Featured Projects
+      </h2>
+      <p class="mx-auto max-w-2xl text-sm text-neutral-400 sm:text-base">
+        A collection of my recent work spanning AI, web development, and
+        innovative solutions
+      </p>
     </div>
-  </section>
-  <section
-    class="@container/section col-span-full flex flex-col gap-2 rounded-2xl ring ring-white/10 md:col-span-6 xl:row-span-4"
-  >
-    <div class="flex flex-1 flex-col gap-4 p-6">
-      <h3
-        class="flex flex-col gap-4 font-semibold @[17.5rem]:flex-row @[17.5rem]:items-center"
-      >
-        <p class="max-w-prose text-white">
-          I've worked on a variety of projects, from small personal projects to
-          large-scale enterprise applications.
-        </p>
-      </h3>
-      <div class="flex flex-col gap-4"></div>
-    </div>
+
+    <BentoGrid client:load />
   </section>
 </Layout>

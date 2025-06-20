@@ -55,7 +55,7 @@ const ShimmerBackground = (): JSX.Element => {
     };
 
     const dotSpacing = isMobile ? 20 : 15; // Increase spacing on mobile
-    const chars = "▲*+~.";
+    const chars = "▲*#-+~.";
     let shimmerProgress = 0;
     let dots: Array<
       Array<{
@@ -85,7 +85,7 @@ const ShimmerBackground = (): JSX.Element => {
             y,
             baseOpacity,
             char: chars[Math.floor(Math.random() * chars.length)],
-            fillStyle: `rgba(255, 255, 255, ${baseOpacity})`,
+            fillStyle: `rgba(255, 155, 100, ${baseOpacity})`,
           });
         }
         dots.push(column);
@@ -99,7 +99,7 @@ const ShimmerBackground = (): JSX.Element => {
       }
 
       lastFrameTime = timestamp;
-      ctx.fillStyle = "#08090b";
+      ctx.fillStyle = "#ffff";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const displayWidth = canvas.width / (window.devicePixelRatio || 1);
