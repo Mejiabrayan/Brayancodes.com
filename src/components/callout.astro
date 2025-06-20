@@ -1,18 +1,19 @@
 ---
 interface Props {
-  type?: 'info' | 'warning' | 'error';
+  type?: "info" | "warning" | "error";
 }
 
-const { type = 'info' } = Astro.props;
+const { type = "info" } = Astro.props;
 
 const styles = {
-  info: 'bg-blue-900/40 text-blue-500 border-blue-500',
-  warning: 'bg-amber-900/40 border-amber-500',
-  error: 'bg-red-900/40 border-red-500'
+  info: "bg-blue-900/40 text-blue-500 border-blue-500",
+  warning: "bg-amber-900/40 border-amber-500",
+  error: "bg-red-900/40 border-red-500",
 } as const;
-
 ---
 
-<div class={`p-2 sm:p-4 border-t-[0.5px] border-b-[0.5px] ${styles[type]} text-sm sm:text-base`}>
-    <slot />
+<div
+  class={`p-2 sm:p-4 border-t-[0.5px] border-b-[0.5px] ${styles[type]} text-sm sm:text-base`}
+>
+  <slot />
 </div>

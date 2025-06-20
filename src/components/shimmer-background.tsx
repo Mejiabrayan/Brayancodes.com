@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 declare global {
   interface Window {
@@ -7,36 +7,41 @@ declare global {
 }
 
 const ShimmerBackground = (): JSX.Element => {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [audioStarted, setAudioStarted] = useState<boolean>(false);
+
+  // Separate effect for audio initialization
   useEffect(() => {
-    const canvas = document.getElementById('backgroundCanvas') as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d', { alpha: false }) as CanvasRenderingContext2D;
+    if (audioRef.current) {
+      audioRef.current.volume = 0.3;
+      audioRef.current.load(); // Force load
+      const playPromise = audioRef.current.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setAudioStarted(true);
+          })
+          .catch(() => {
+            // Autoplay failed, will need user interaction
+          });
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const canvas = document.getElementById(
+      "backgroundCanvas",
+    ) as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d", {
+      alpha: false,
+    }) as CanvasRenderingContext2D;
 
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const canVibrate = isMobile && window.navigator && window.navigator.vibrate;
-    let lastVibrationTime = 0;
-    const VIBRATION_COOLDOWN = 1000;
     let animationFrameId: number;
     let lastFrameTime = 0;
     const TARGET_FPS = 60;
     const FRAME_INTERVAL = 1000 / TARGET_FPS;
-
-    const requestVibrationPermission = async () => {
-      if (isMobile && typeof DeviceMotionEvent !== 'undefined') {
-        try {
-          // @ts-ignore
-          if (DeviceMotionEvent.requestPermission) {
-            // @ts-ignore
-            const permission = await DeviceMotionEvent.requestPermission();
-            return permission === 'granted';
-          }
-        } catch (e) {
-          console.log('Vibration permission request failed:', e);
-        }
-      }
-      return false;
-    };
-
-    requestVibrationPermission();
 
     const setSize = (): void => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap DPR at 2
@@ -50,47 +55,40 @@ const ShimmerBackground = (): JSX.Element => {
     };
 
     const dotSpacing = isMobile ? 20 : 15; // Increase spacing on mobile
-    const chars = '▲*+~.';
+    const chars = "▲*+~.";
     let shimmerProgress = 0;
-    let dots: Array<Array<{
-      x: number;
-      y: number;
-      baseOpacity: number;
-      char: string;
-      fillStyle: string;
-    }>> = [];
+    let dots: Array<
+      Array<{
+        x: number;
+        y: number;
+        baseOpacity: number;
+        char: string;
+        fillStyle: string;
+      }>
+    > = [];
 
     const initDots = () => {
       dots = [];
       const displayWidth = canvas.width / (window.devicePixelRatio || 1);
       const displayHeight = canvas.height / (window.devicePixelRatio || 1);
-      
+
       ctx.font = `${dotSpacing / 1.5}px var(--font-Geist)`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
 
       for (let x = 0; x < displayWidth; x += dotSpacing) {
         const column = [];
         for (let y = 0; y < displayHeight; y += dotSpacing) {
-          const baseOpacity = 0.02; // Slightly increased base opacity
+          const baseOpacity = 0.0; // Slightly increased base opacity
           column.push({
             x,
             y,
             baseOpacity,
             char: chars[Math.floor(Math.random() * chars.length)],
-            fillStyle: `rgba(255, 255, 255, ${baseOpacity})`
+            fillStyle: `rgba(255, 255, 255, ${baseOpacity})`,
           });
         }
         dots.push(column);
-      }
-    };
-
-    const tryVibrate = () => {
-      if (!canVibrate) return;
-      const now = Date.now();
-      if (now - lastVibrationTime >= VIBRATION_COOLDOWN) {
-        window.navigator.vibrate([50, 30, 50]);
-        lastVibrationTime = now;
       }
     };
 
@@ -101,7 +99,7 @@ const ShimmerBackground = (): JSX.Element => {
       }
 
       lastFrameTime = timestamp;
-      ctx.fillStyle = '#000000';
+      ctx.fillStyle = "#08090b";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const displayWidth = canvas.width / (window.devicePixelRatio || 1);
@@ -110,11 +108,6 @@ const ShimmerBackground = (): JSX.Element => {
       const shimmerY = displayHeight / 2.5;
       const shimmerRadius = displayWidth * 0.8;
       const shimmerRadiusSquared = shimmerRadius * shimmerRadius;
-      const triggerZone = isMobile ? 100 : 50;
-
-      if (Math.abs(shimmerX - displayWidth / 2) < triggerZone) {
-        tryVibrate();
-      }
 
       dots.forEach((column) => {
         column.forEach((dot) => {
@@ -123,20 +116,20 @@ const ShimmerBackground = (): JSX.Element => {
           const distanceSquared = dx * dx + dy * dy;
 
           if (distanceSquared < shimmerRadiusSquared) {
-            const shimmerFactor = 1 - Math.sqrt(distanceSquared) / shimmerRadius;
+            const shimmerFactor =
+              1 - Math.sqrt(distanceSquared) / shimmerRadius;
             const shimmerEffect = Math.pow(shimmerFactor, 4) * 0.5;
             ctx.fillStyle = `rgba(300, 300, 400, ${dot.baseOpacity + shimmerEffect})`;
           } else {
             ctx.fillStyle = dot.fillStyle;
           }
-          
+
           ctx.fillText(dot.char, dot.x, dot.y);
         });
       });
 
-      shimmerProgress += 0.002; // Reduced speed
+      shimmerProgress += 0.003; // Reduced speed
       shimmerProgress %= 1;
-
       animationFrameId = requestAnimationFrame(drawBackground);
     };
 
@@ -146,18 +139,37 @@ const ShimmerBackground = (): JSX.Element => {
       clearTimeout(window.resizeTimer);
       window.resizeTimer = setTimeout(setSize, 250);
     };
-    window.addEventListener('resize', resizeHandler);
+    window.addEventListener("resize", resizeHandler);
     animationFrameId = requestAnimationFrame(drawBackground);
 
     return () => {
-      window.removeEventListener('resize', resizeHandler);
+      window.removeEventListener("resize", resizeHandler);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
+  const handleClick = () => {
+    if (audioRef.current && !audioStarted) {
+      audioRef.current
+        .play()
+        .then(() => {
+          setAudioStarted(true);
+        })
+        .catch((err) => {
+          console.log("Audio playback failed:", err);
+        });
+    }
+  };
+
   return (
-    <div className='fixed inset-0 -z-10'>
-      <canvas id='backgroundCanvas' />
+    <div className="fixed inset-0 -z-10" onClick={handleClick}>
+      <canvas id="backgroundCanvas" />
+      <audio
+        ref={audioRef}
+        src="/background-sound.mp3"
+        preload="auto"
+        style={{ display: "none" }}
+      />
     </div>
   );
 };

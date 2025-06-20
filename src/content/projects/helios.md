@@ -1,9 +1,9 @@
 ---
-title: 'Helios Email Agent'
-link: ''
+title: "Helios Email Agent"
+link: ""
 overview: "Helios AI uses Vercel's AI SDK to manage, organize, label, and give you weekly summaries of your emails"
 date: 2025-10-02
-cover: '/assets/helios.png'
+cover: "/assets/helios.png"
 ---
 
 # Overview
@@ -11,6 +11,7 @@ cover: '/assets/helios.png'
 Helios AI revolutionizes email management with an intelligent agent that leverages Vercel's AI SDK to provide a seamless experience. It automatically categorizes, prioritizes, and summarizes your inbox while offering a modern, intuitive interface for effortless email control.
 
 Key Features:
+
 - AI-powered email categorization and prioritization
 - Weekly digest summaries of important emails
 - Smart labeling and tagging system
@@ -48,4 +49,3 @@ Key Features:
 - Adding multi-language support
 
 ![Helios Email Interface](/assets/x-post.png)
-

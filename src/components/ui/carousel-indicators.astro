@@ -8,12 +8,12 @@ const { count, slideWidth = 300 } = Astro.props;
 ---
 
 <div
-  class='carousel-indicators absolute bottom-0 left-0 right-0 flex justify-center gap-3 mt-4 pb-4'
+  class="carousel-indicators absolute right-0 bottom-0 left-0 mt-4 flex justify-center gap-3 pb-4"
 >
   {
     Array.from({ length: count }).map((_, index) => (
       <button
-        class='carousel-dot w-2.5 h-2.5 rounded-full bg-neutral-800/50 transition-all duration-300'
+        class="carousel-dot h-2.5 w-2.5 rounded-full bg-neutral-800/50 transition-all duration-300"
         data-index={index}
         aria-label={`Go to slide ${index + 1}`}
       />
@@ -22,25 +22,25 @@ const { count, slideWidth = 300 } = Astro.props;
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', initializeCarousel);
+  document.addEventListener("DOMContentLoaded", initializeCarousel);
 
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
       initializeCarousel();
     }
   });
 
-  document.addEventListener('astro:page-load', initializeCarousel);
+  document.addEventListener("astro:page-load", initializeCarousel);
 
   function initializeCarousel() {
-    const slider = document.getElementById('slider');
+    const slider = document.getElementById("slider");
     if (!slider) return;
 
-    const dots = document.querySelectorAll('.carousel-dot');
+    const dots = document.querySelectorAll(".carousel-dot");
     if (!dots.length) return;
 
-    dots.forEach((d) => d.classList.remove('active'));
-    dots[0].classList.add('active');
+    dots.forEach((d) => d.classList.remove("active"));
+    dots[0].classList.add("active");
 
     const updateActiveDot = () => {
       if (!slider) return;
@@ -53,7 +53,7 @@ const { count, slideWidth = 300 } = Astro.props;
       if (Math.abs(scrollPosition - maxScroll) < 20) {
         const lastIndex = dots.length - 1;
         dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === lastIndex);
+          dot.classList.toggle("active", index === lastIndex);
         });
         return;
       }
@@ -62,19 +62,19 @@ const { count, slideWidth = 300 } = Astro.props;
 
       dots.forEach((dot, index) => {
         if (index === activeIndex) {
-          dot.classList.add('active');
+          dot.classList.add("active");
         } else {
-          dot.classList.remove('active');
+          dot.classList.remove("active");
         }
       });
     };
 
-    slider.addEventListener('scroll', updateActiveDot);
+    slider.addEventListener("scroll", updateActiveDot);
 
     dots.forEach((dot, index) => {
-      dot.removeEventListener('click', dotClickHandler);
+      dot.removeEventListener("click", dotClickHandler);
 
-      dot.addEventListener('click', dotClickHandler);
+      dot.addEventListener("click", dotClickHandler);
 
       function dotClickHandler() {
         if (!slider || !slider.children[index]) return;
@@ -84,18 +84,18 @@ const { count, slideWidth = 300 } = Astro.props;
         if (index === dots.length - 1) {
           slider.scrollTo({
             left: slider.scrollWidth - slider.clientWidth,
-            behavior: 'smooth',
+            behavior: "smooth",
           });
         } else {
           slider.scrollTo({
             left: slideWidth * index,
-            behavior: 'smooth',
+            behavior: "smooth",
           });
         }
 
         // Update active state
-        dots.forEach((d) => d.classList.remove('active'));
-        dot.classList.add('active');
+        dots.forEach((d) => d.classList.remove("active"));
+        dot.classList.add("active");
       }
     });
 

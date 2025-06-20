@@ -1,69 +1,69 @@
 ---
-import { Image } from 'astro:assets';
-import Badge from './badge.astro';
-import CarouselIndicators from './carousel-indicators.astro';
+import { Image } from "astro:assets";
+import Badge from "./badge.astro";
+import CarouselIndicators from "./carousel-indicators.astro";
 
 interface Props {
   items: any[];
   basePath: string; // e.g., 'blogs' or 'work'
-  type: 'blog' | 'project';
+  type: "blog" | "project";
 }
 
 const { items, basePath, type } = Astro.props;
 
 // Helper function to format date for blogs
 const formatDate = (date: Date): string => {
-  return new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
   });
 };
 ---
 
-<div class='relative pb-20'>
+<div class="relative pb-20">
   <div
-    id='slider'
-    class='grid grid-flow-col auto-cols-[80%] sm:auto-cols-[45%] md:auto-cols-[300px] gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none scroll-smooth pr-4 md:pr-6'
-    style='scroll-padding: 0 1rem; view-timeline-name: --slider; view-timeline-axis: inline;'
+    id="slider"
+    class="scrollbar-none grid snap-x snap-mandatory auto-cols-[80%] grid-flow-col gap-4 overflow-x-auto scroll-smooth pr-4 sm:auto-cols-[45%] md:auto-cols-[300px] md:pr-6"
+    style="scroll-padding: 0 1rem; view-timeline-name: --slider; view-timeline-axis: inline;"
   >
     {
       items.map((item: any) => (
         <a
           href={`/${basePath}/${item.slug}`}
-          class='block snap-start project-card group'
-          style='view-timeline-name: --reveal; view-timeline-axis: inline;'
+          class="project-card group block snap-start"
+          style="view-timeline-name: --reveal; view-timeline-axis: inline;"
         >
           <div class="relative h-full">
             <Image
-              loading='eager'
-              src={type === 'blog' ? item.data.image : item.data.cover}
+              loading="eager"
+              src={type === "blog" ? item.data.image : item.data.cover}
               alt={item.data.title}
               width={300}
               height={300}
               quality={100}
-              class='rounded-lg w-full aspect-square object-cover image-reveal group-hover:scale-105 transition-transform duration-500'
+              class="image-reveal aspect-square w-full rounded-lg object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div class="mt-4 space-y-2">
-              <h2 class='text-lg sm:text-xl font-[Tobias] italic text-neutral-300 title-reveal group-hover:text-white transition-colors'>
+              <h2 class="title-reveal font-[Tobias] text-lg text-neutral-300 italic transition-colors group-hover:text-white sm:text-xl">
                 {item.data.title}
               </h2>
-              
-              {type === 'blog' && (
-                <time class='text-sm sm:text-base text-neutral-300/70 font-mono title-reveal block'>
+
+              {type === "blog" && (
+                <time class="title-reveal block font-mono text-sm text-neutral-300/70 sm:text-base">
                   {formatDate(item.data.date)}
                 </time>
               )}
-              
-              {type === 'blog' && item.data.tags && (
-                <div class='flex items-center gap-x-2 flex-wrap title-reveal'>
+
+              {type === "blog" && item.data.tags && (
+                <div class="title-reveal flex flex-wrap items-center gap-x-2">
                   {item.data.tags.map((tag: string) => (
                     <Badge text={tag} />
                   ))}
                 </div>
               )}
-              
-              <p class='text-sm sm:text-base text-neutral-300/90 line-clamp-2 title-reveal'>
-                {type === 'blog' ? item.data.description : item.data.overview}
+
+              <p class="title-reveal line-clamp-2 text-sm text-neutral-300/90 sm:text-base">
+                {type === "blog" ? item.data.description : item.data.overview}
               </p>
             </div>
           </div>
@@ -71,7 +71,7 @@ const formatDate = (date: Date): string => {
       ))
     }
   </div>
-  
+
   <CarouselIndicators count={items.length} />
 </div>
 
@@ -81,11 +81,11 @@ const formatDate = (date: Date): string => {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
-  
+
   /* Animation styles for the image and title reveals */
   @keyframes image-reveal {
     from {
@@ -97,7 +97,7 @@ const formatDate = (date: Date): string => {
       transform: translateY(0);
     }
   }
-  
+
   @keyframes title-reveal {
     from {
       opacity: 0;
@@ -108,16 +108,16 @@ const formatDate = (date: Date): string => {
       transform: translateY(0);
     }
   }
-  
+
   .image-reveal {
     animation: image-reveal 0.7s ease forwards;
     animation-timeline: --reveal;
     animation-range: entry 0% cover 20%;
   }
-  
+
   .title-reveal {
     animation: title-reveal 0.5s ease forwards;
     animation-timeline: --reveal;
     animation-range: entry 10% cover 30%;
   }
-</style> 
+</style>

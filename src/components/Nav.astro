@@ -1,38 +1,42 @@
 <nav
-  aria-label='Main Navigation'
-  class='mb-16 flex w-full items-center justify-between py-6 text-base sm:text-lg'
+  aria-label="Main Navigation"
+  class="sticky top-0 z-50 w-full backdrop-blur-sm"
 >
-  <div class='flex items-center gap-4'>
-    <a
-      href='/'
-      class='nav-link transition-colors duration-200 hover:text-white hover:bg-transparent'
-      transition:animate="slide"
-    >
-      <span transition:name="nav-home">Home</span>
-    </a>
-    <a
-      href='/work'
-      class='nav-link transition-colors duration-200 hover:text-white hover:bg-transparent'
-      transition:animate="slide"
-    >
-      <span transition:name="nav-work">Work</span>
-    </a>
-    <a
-      href='/blogs'
-      class='nav-link transition-colors duration-200 hover:text-white hover:bg-transparent'
-      transition:animate="slide"
-    >
-      <span transition:name="nav-blogs">Blogs</span>
-    </a>
-  </div>
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <div class="flex items-center gap-2 sm:gap-4">
+        <a
+          href="/"
+          class="nav-link text-sm transition-colors duration-200 hover:text-white sm:text-base"
+          transition:animate="slide"
+        >
+          <span transition:name="nav-home">Home</span>
+        </a>
+        <a
+          href="/work"
+          class="nav-link text-sm transition-colors duration-200 hover:text-white sm:text-base"
+          transition:animate="slide"
+        >
+          <span transition:name="nav-work">Work</span>
+        </a>
+        <a
+          href="/blogs"
+          class="nav-link text-sm transition-colors duration-200 hover:text-white sm:text-base"
+          transition:animate="slide"
+        >
+          <span transition:name="nav-blogs">Blogs</span>
+        </a>
+      </div>
 
-  <a
-    href='mailto:mejiabrayan@protonmail.com'
-    class='nav-link px-4 py-2 font-[Tobias] text-neutral-400 italic hover:text-white'
-    transition:animate="fade"
-  >
-    <span transition:name="nav-contact">Contact Me</span>
-  </a>
+      <a
+        href="mailto:mejiabrayan@protonmail.com"
+        class="nav-link rounded-md px-2 py-1 font-[Tobias] text-sm text-neutral-400 italic transition-all duration-200 hover:bg-neutral-800/50 hover:text-white sm:px-4 sm:py-2 sm:text-base"
+        transition:animate="fade"
+      >
+        <span transition:name="nav-contact">Contact Me</span>
+      </a>
+    </div>
+  </div>
 </nav>
 
 <script>
@@ -44,12 +48,12 @@
 
     private constructor() {
       // Preload audio and set properties
-      this.audio = new Audio('/btn-sound.mp3');
+      this.audio = new Audio("/btn-sound.mp3");
       this.audio.volume = 0.3;
-      this.audio.preload = 'auto';
+      this.audio.preload = "auto";
 
       // Add ended event listener to reset state
-      this.audio.addEventListener('ended', () => {
+      this.audio.addEventListener("ended", () => {
         this.isPlaying = false;
         this.audioPromise = null;
       });
@@ -72,7 +76,7 @@
         this.audioPromise = this.audio.play();
         await this.audioPromise;
       } catch (error) {
-        console.warn('Audio playback failed:', error);
+        console.warn("Audio playback failed:", error);
       } finally {
         this.isPlaying = false;
         this.audioPromise = null;
@@ -85,24 +89,23 @@
 
   // Use event delegation for better performance
   document.addEventListener(
-    'click',
+    "click",
     (event) => {
       const target = event.target as HTMLElement;
-      if (target.closest('.nav-link')) {
+      if (target.closest(".nav-link")) {
         soundManager.playSound();
       }
     },
-    { passive: true }
+    { passive: true },
   );
 
   // Preload audio on page load
   window.addEventListener(
-    'load',
+    "load",
     () => {
-      const audio = new Audio('/btn-sound.mp3');
-      audio.preload = 'auto';
+      const audio = new Audio("/btn-sound.mp3");
+      audio.preload = "auto";
     },
-    { once: true }
+    { once: true },
   );
 </script>
-

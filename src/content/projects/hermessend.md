@@ -1,9 +1,9 @@
 ---
-title: 'HermesSend'
-link: 'https://hermessend.xyz/'
-overview: 'A user-friendly email platform built on AWS SES that simplifies domain verification and email campaigns.'
+title: "HermesSend"
+link: "https://hermessend.xyz/"
+overview: "A user-friendly email platform built on AWS SES that simplifies domain verification and email campaigns."
 date: 2024-17-12
-cover: '/assets/hermes.webp'
+cover: "/assets/hermes.webp"
 ---
 
 HermesSend is a modern email platform that eliminates the complexity of AWS SES by providing an intuitive dashboard for managing your email operations. Skip the convoluted AWS console and start sending emails through a streamlined interface designed for efficiency.
@@ -23,5 +23,3 @@ HermesSend is a modern email platform that eliminates the complexity of AWS SES 
 - Tailwind CSS with Shadcn components for the UI
 - TipTap for rich text editing
 - Nuqs for search parameter management
-
-

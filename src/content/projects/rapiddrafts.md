@@ -1,10 +1,10 @@
 ---
-title: 'RapidDrafts.com'
-link: 'https://rapiddrafts.com/'
-overview: 'RapidDrafts is your comprehensive AI drafting assistant, designed to streamline your content creation process.'
+title: "RapidDrafts.com"
+link: "https://rapiddrafts.com/"
+overview: "RapidDrafts is your comprehensive AI drafting assistant, designed to streamline your content creation process."
 date: 2024-05-10
-cover: '/assets/rapiddrafts.webp'
-video: '/assets/dashboard.mp4'
+cover: "/assets/rapiddrafts.webp"
+video: "/assets/dashboard.mp4"
 ---
 
 RapidDrafts is your comprehensive AI drafting assistant, designed to streamline your content creation process. Whether you're a content creator, blogger, writer, scholar, or entrepreneur, RapidDrafts generates your ideas on the fly. With features such as choosing the tonality of your draft, picking your word count, and customizing the structure, RapidDrafts ensures your content is tailored to your specific needs.

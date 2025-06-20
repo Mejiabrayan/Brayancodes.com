@@ -1,23 +1,24 @@
 ---
-import Layout from '~/layouts/Layout.astro';
-import Carousel from '~/components/ui/carousel.astro';
-import { getCollection } from 'astro:content';
+import Layout from "~/layouts/Layout.astro";
+import Carousel from "~/components/ui/carousel.astro";
+import { getCollection } from "astro:content";
 
-const projects = await getCollection('projects');
+const projects = await getCollection("projects");
 ---
 
-<Layout title='Work | Brayan M. Cuenca'>
-  <div class='relative max-w-sm md:max-w-2xl lg:max-w-3xl mx-auto px-4'>
-    <header class='text-center mb-20'>
+<Layout title="Work | Brayan M. Cuenca">
+  <div class="relative mx-auto max-w-sm px-4 md:max-w-2xl lg:max-w-3xl">
+    <header class="mb-20 text-center">
       <h1
-        class='text-4xl font-[Tobias] italic text-neutral-300'
-        transition:name='work'
-        transition:animate='slide'
+        class="font-[Tobias] text-4xl text-neutral-300 italic"
+        transition:name="work"
+        transition:animate="slide"
       >
         Work
       </h1>
-      <p class='text-neutral-300/90 mt-2'>
-        A collection of projects I've built, exploring various technologies and ideas.
+      <p class="mt-2 text-neutral-300/90">
+        A collection of projects I've built, exploring various technologies and
+        ideas.
       </p>
     </header>
 

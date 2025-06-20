@@ -1,7 +1,7 @@
 ---
-import '~/styles/globals.css';
-import Nav from '~/components/Nav.astro';
-import { ViewTransitions } from 'astro:transitions';
+import "~/styles/globals.css";
+import Nav from "~/components/Nav.astro";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -19,62 +19,60 @@ interface Props {
 const {
   title,
   description = "Brayan Mejia Cuenca's Portfolio Website",
-  image = '/og-image.png',
-  type = 'website',
+  image = "/og-image.png",
+  type = "website",
   canonicalURL = Astro.url.href,
-  keywords = 'Software Engineer, Full-Stack Developer, Web Development, React, Next.js, TypeScript, JavaScript, Node.js, Astro, TailwindCSS, UI/UX Design, Frontend Development, Backend Development, API Development, Cloud Computing, AWS, AI Integration, Web Performance, Responsive Design, Modern Web Development, San Francisco Bay Area Developer, Portfolio',
-  author = 'Brayan Mejia Cuenca',
-  ogDescription = 'Full-Stack Developer based in the San Francisco Bay Area',
-  twitterHandle = '@brayancodes',
-  linkedIn = 'https://www.linkedin.com/in/brayan-mejia/',
+  keywords = "Software Engineer, Full-Stack Developer, Front-End Developer, Web Development, React, Next.js, TypeScript, JavaScript, Node.js, Astro, TailwindCSS, UI/UX Design, Frontend Development, Backend Development, API Development, Cloud Computing, AWS, AI Integration, Web Performance, Responsive Design, Modern Web Development, San Francisco Bay Area Developer, Portfolio",
+  author = "Brayan Mejia Cuenca",
+  ogDescription = "Full-Stack Developer based in the San Francisco Bay Area",
+  twitterHandle = "@brayancodes",
+  linkedIn = "https://www.linkedin.com/in/brayan-mejia/",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang="en">
   <head>
-    <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <meta name='description' content={description} />
-    <meta name='keywords' content={keywords} />
-    <meta name='author' content={author} />
-    <link rel='canonical' href={canonicalURL} />
-    <meta name='color-scheme' content='dark' />
-    <meta name='theme-color' content='#08090B' />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#08090B" />
 
     <!-- Open Graph / Facebook -->
-    <meta property='og:title' content={title} />
-    <meta property='og:description' content={ogDescription} />
-    <meta property='og:image' content={image} />
-    <meta property='og:type' content={type} />
-    <meta property='og:url' content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={image} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
 
     <!-- Twitter -->
-    <meta property='twitter:card' content='summary_large_image' />
-    <meta property='twitter:creator' content={twitterHandle} />
-    <meta property='twitter:title' content={title} />
-    <meta property='twitter:description' content={ogDescription} />
-    <meta property='twitter:image' content={image} />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:creator" content={twitterHandle} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={ogDescription} />
+    <meta property="twitter:image" content={image} />
 
     <!-- LinkedIn -->
-    <meta property='linkedin:card' content='summary_large_image' />
-    <meta property='linkedin:creator' content={linkedIn} />
-    <meta property='linkedin:title' content={title} />
-    <meta property='linkedin:description' content={ogDescription} />
-    <meta property='linkedin:image' content={image} />
+    <meta property="linkedin:card" content="summary_large_image" />
+    <meta property="linkedin:creator" content={linkedIn} />
+    <meta property="linkedin:title" content={title} />
+    <meta property="linkedin:description" content={ogDescription} />
+    <meta property="linkedin:image" content={image} />
 
-    <link rel='icon' type='image/x-icon' href='/favicon.ico' />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class='antialiased bg-black'>
-    <main class='isolate flex w-full justify-center px-4 relative'>
-      <div
-        class='flex max-w-screen justify-center min-h-screen flex-col items-center'
-      >
-        <Nav />
-        <slot />
-    </div>
+  <body>
+    <Nav />
+    <main
+      class="relative isolate mx-auto max-w-2xl px-4 py-16 antialiased sm:px-6 sm:py-24 lg:px-8"
+    >
+      <slot />
     </main>
   </body>
 </html>

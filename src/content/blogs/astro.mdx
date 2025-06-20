@@ -1,10 +1,10 @@
 ---
-title: 'Syntax Highlighting With Astro Built-in Capabilities'
+title: "Syntax Highlighting With Astro Built-in Capabilities"
 author: Brayan Mejia Cuenca
-description: 'Astro, the powerful static site builder, comes with built-in support for syntax highlighting, making it a breeze to showcase code snippets on your website'
+description: "Astro, the powerful static site builder, comes with built-in support for syntax highlighting, making it a breeze to showcase code snippets on your website"
 date: 2024-05-10
-image: '/syntax.webp'
-tags: ['astro', 'syntax-highlighting', 'web-development', 'markdown']
+image: "/syntax.webp"
+tags: ["astro", "syntax-highlighting", "web-development", "markdown"]
 ---
 
 Recently, I found myself digging through Contentful's documentation, spending too much time setting up proper formatting like syntax highlighting for my personal website. The inconvenience of navigating documentation just to achieve simple tasks like displaying code blocks can be a pain point. Most of the time, third-party libraries are required, which are quicker to set up but not the ideal route. When you factor in styling and other considerations, it can get complicated. Maybe it's a skill issue, but it would be preferable if functionality existed in frameworks natively.
@@ -39,19 +39,19 @@ Astro provides comprehensive syntax highlighting through both Shiki and Prism, o
 Here's a practical example of configuring Shiki in your `astro.config.mjs`:
 
 ```js
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
   markdown: {
     shikiConfig: {
-      theme: 'dracula',
+      theme: "dracula",
       // Enable word wrap to prevent horizontal scrolling
       wrap: true,
       // Support for light/dark theme switching
       experimentalThemes: {
-        light: 'github-light',
-        dark: 'github-dark',
-      }
+        light: "github-light",
+        dark: "github-dark",
+      },
     },
   },
 });
@@ -63,7 +63,7 @@ The `<Code />` component provides a simple way to add syntax highlighting to inl
 
 ```astro
 ---
-import { Code } from 'astro/components';
+import { Code } from "astro/components";
 ---
 
 <Code code={`console.log('Hello, Astro!');`} lang="js" />
@@ -107,10 +107,10 @@ Beyond basic syntax highlighting, Astro's integration with Shiki offers several 
 You can highlight specific lines by adding numbers in curly braces:
 
 ```js {1,3-4}
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 // Highlight these important lines
-console.log('This line is highlighted!');
+console.log("This line is highlighted!");
 ```
 
 ## Styling Code Blocks
@@ -123,7 +123,7 @@ Astro code blocks use the `.astro-code` class, making it easy to customize their
   padding: 1rem;
   border-radius: 0.5rem;
   margin: 1rem 0;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
 }
 
 /* Dark mode adjustments */
@@ -147,6 +147,7 @@ One of the biggest advantages of using Astro's built-in syntax highlighting is t
 ### Performance Metrics
 
 In my testing, switching from a client-side syntax highlighter to Astro's built-in solution resulted in:
+
 - 30% reduction in page load time
 - Zero JavaScript overhead
 - Improved Lighthouse performance scores

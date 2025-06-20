@@ -1,5 +1,3 @@
-import { db } from 'astro:db';
+import { db } from "astro:db";
 
-export default async function seed() {
-
-}
+export default async function seed() {}

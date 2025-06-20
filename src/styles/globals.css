@@ -1,33 +1,33 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin "@tailwindcss/typography";
-
 
 * {
   box-sizing: border-box;
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist/Geist-Regular.otf') format('truetype');
+  font-family: "Geist";
+  src: url("/fonts/Geist/Geist-Regular.otf") format("truetype");
   font-weight: 100 900;
   font-display: swap;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Tobias';
-  src: url('/fonts/Tobias/Tobias-Italic.ttf') format('truetype');
+  font-family: "Tobias";
+  src: url("/fonts/Tobias/Tobias-Italic.ttf") format("truetype");
   font-weight: 100 900;
   font-display: swap;
   font-style: italic;
 }
 
 :root {
-  --font-Geist: 'Geist', system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, sans-serif;
-  --font-Tobias: 'Tobias', system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, sans-serif;
+  --font-Geist:
+    "Geist", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --font-Tobias:
+    "Tobias", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
   --bg-color: #08090b;
   --text-primary: #d4d4d8;
 
@@ -92,7 +92,7 @@ canvas {
 }
 
 .project-card::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -20px;
   left: 0;
@@ -199,12 +199,12 @@ a:hover svg {
 }
 
 /* Text Shine Variants */
-.text-shine[data-style='aurora']:hover {
+.text-shine[data-style="aurora"]:hover {
   --shimmer-bg: var(--shimmer-aurora) 0 0 / 300% 100% no-repeat;
   color: rgba(255, 255, 255, 0.95);
 }
 
-.text-shine[data-style='flame']:hover {
+.text-shine[data-style="flame"]:hover {
   --shimmer-bg: var(--shimmer-flame) 0 0 / 300% 100% no-repeat;
 }
 

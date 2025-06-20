@@ -1,11 +1,11 @@
 ---
-title: 'Building Reusable TypeScript React Components'
+title: "Building Reusable TypeScript React Components"
 author: Brayan Mejia Cuenca
 description: "It not only enhances code maintainability but also accelerates development by enabling developers to leverage pre-built solutions."
 date: 2023-08-08
-image: '/stock.webp'
+image: "/stock.webp"
 attributedImg: Pankaj Patel
-tags: ['typescript', 'react', 'components']
+tags: ["typescript", "react", "components"]
 ---
 
 ## In the world of modern web development, building reusable components is a crucial skill.
@@ -39,11 +39,11 @@ Here's an example of setting up a TypeScript React project with Create React App
 ```tsx
 import React from 'react';
 
- interface ButtonProps { text: string; onClick: () => void; } 
+ interface ButtonProps { text: string; onClick: () => void; }
  const Button: React.FC<ButtonProps> = ({ text, onClick }) => {
    return (
     <button onClick="{onClick}">{text}</button>
-  )} 
+  )}
   export default Button;</ButtonProps>
 ```
 

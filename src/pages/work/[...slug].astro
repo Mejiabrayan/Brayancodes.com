@@ -1,18 +1,18 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import { ClientRouter } from 'astro:transitions';
-import Container from '../../components/container.astro';
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
+import Container from "../../components/container.astro";
 
 const { slug } = Astro.params;
-const projects = await getCollection('projects');
+const projects = await getCollection("projects");
 const project = projects.find((project) => project.slug === slug);
 
 if (!project) {
   return new Response(null, {
     status: 404,
-    statusText: 'Not found'
+    statusText: "Not found",
   });
 }
 
@@ -23,20 +23,22 @@ const { title, overview, cover, link } = project.data;
 <Layout title={`${title} | Project`}>
   <ClientRouter />
   <Container>
-    <article class='max-w-3xl mx-auto'>
+    <article class="mx-auto max-w-3xl">
       <!-- Header -->
-      <header class='text-center space-y-4 mb-12'>
-        <h1 class='text-4xl font-[Tobias] italic text-neutral-300'>{title}</h1>
-        <p class='text-lg text-neutral-300/90'>{overview}</p>
-        <div class="flex items-center justify-center gap-4 text-sm text-neutral-400">
+      <header class="mb-12 space-y-4 text-center">
+        <h1 class="font-[Tobias] text-4xl text-neutral-300 italic">{title}</h1>
+        <p class="text-lg text-neutral-300/90">{overview}</p>
+        <div
+          class="flex items-center justify-center gap-4 text-sm text-neutral-400"
+        >
           <span id="viewCount">0 views</span>
           {
             link && (
               <a
                 href={link}
-                target='_blank'
-                rel='noopener noreferrer'
-                class='text-neutral-300 hover:text-white transition-colors duration-200'
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-neutral-300 transition-colors duration-200 hover:text-white"
               >
                 View Project →
               </a>
@@ -46,49 +48,39 @@ const { title, overview, cover, link } = project.data;
       </header>
 
       <!-- Project Image with Reflection -->
-      <div class='reflection-wrapper'>
+      <div class="reflection-wrapper">
         <!-- Original Image -->
         <div
-          class='relative isolate aspect-video w-full rounded-lg overflow-hidden'
+          class="relative isolate aspect-video w-full overflow-hidden rounded-lg"
         >
           <Image
             src={cover}
             alt={title}
             width={1000}
             height={1000}
-            class='w-full h-full object-cover'
-            loading={'lazy'}
+            class="h-full w-full object-cover"
+            loading={"lazy"}
           />
         </div>
 
         <!-- Reflection -->
         <div
-          class='relative isolate aspect-video w-full overflow-hidden reflection'
+          class="reflection relative isolate aspect-video w-full overflow-hidden"
         >
           <Image
             src={cover}
             alt={`${title} reflection`}
             width={1000}
             height={1000}
-            class='w-full h-[75%] object-cover'
-            loading={'lazy'}
+            class="h-[75%] w-full object-cover"
+            loading={"lazy"}
           />
         </div>
       </div>
 
       <!-- Content -->
       <div
-        class='prose prose-neutral prose-invert max-w-none leading-normal mt-0
-        prose-headings:font-[Tobias] prose-headings:italic
-        prose-h1:text-neutral-300 prose-h1:text-2xl
-        prose-h2:text-neutral-300 prose-h2:text-xl
-        prose-h3:text-neutral-300 prose-h3:text-lg
-        prose-p:text-neutral-300
-        prose-a:text-white prose-a:no-underline hover:prose-a:text-neutral-200
-        prose-strong:text-white
-        prose-code:rounded-sm prose-code:border prose-code:border-white/10
-        prose-code:bg-neutral-800/50 prose-code:px-1
-        prose-ul:text-neutral-300'
+        class="prose prose-neutral prose-invert prose-headings:font-[Tobias] prose-headings:italic prose-h1:text-neutral-300 prose-h1:text-2xl prose-h2:text-neutral-300 prose-h2:text-xl prose-h3:text-neutral-300 prose-h3:text-lg prose-p:text-neutral-300 prose-a:text-white prose-a:no-underline hover:prose-a:text-neutral-200 prose-strong:text-white prose-code:rounded-sm prose-code:border prose-code:border-white/10 prose-code:bg-neutral-800/50 prose-code:px-1 prose-ul:text-neutral-300 mt-0 max-w-none leading-normal"
       >
         <Content />
       </div>
@@ -113,15 +105,13 @@ const { title, overview, cover, link } = project.data;
 
 <script is:inline define:vars={{ slug }}>
   // Increment view count
-  fetch(`/api/projects/${slug}`, { method: 'POST' })
-    .then(res => res.json())
-    .then(data => {
+  fetch(`/api/projects/${slug}`, { method: "POST" })
+    .then((res) => res.json())
+    .then((data) => {
       if (data.views) {
-        document.getElementById('viewCount').textContent = 
+        document.getElementById("viewCount").textContent =
           `${data.views.toLocaleString()} views`;
       }
     })
-    .catch(err => console.error('Failed to update views:', err));
+    .catch((err) => console.error("Failed to update views:", err));
 </script>
-
-

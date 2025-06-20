@@ -1,58 +1,58 @@
 {
-    "name": "dark",
-    "type": "dark",
-    "colors": {
-      "editor.background": "#000000",
-      "editor.foreground": "#D7DAE0"
-    },
-    "tokenColors": [
-      {
-        "scope": ["comment", "punctuation.definition.comment"],
-        "settings": {
-          "foreground": "#5C6370"
-        }
-      },
-      {
-        "scope": ["string", "punctuation.definition.string"],
-        "settings": {
-          "foreground": "#98C379"
-        }
-      },
-      {
-        "scope": ["keyword", "storage.type", "storage.modifier"],
-        "settings": {
-          "foreground": "#C678DD"
-        }
-      },
-      {
-        "scope": ["entity.name.function", "support.function"],
-        "settings": {
-          "foreground": "#61AFEF"
-        }
-      },
-      {
-        "scope": ["variable", "support.variable"],
-        "settings": {
-          "foreground": "#E06C75"
-        }
-      },
-      {
-        "scope": ["constant.numeric"],
-        "settings": {
-          "foreground": "#D19A66"
-        }
-      },
-      {
-        "scope": ["entity.name.tag", "punctuation.definition.tag"],
-        "settings": {
-          "foreground": "#E06C75"
-        }
-      },
-      {
-        "scope": ["entity.other.attribute-name"],
-        "settings": {
-          "foreground": "#D19A66"
-        }
+  "name": "dark",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#000000",
+    "editor.foreground": "#D7DAE0"
+  },
+  "tokenColors": [
+    {
+      "scope": ["comment", "punctuation.definition.comment"],
+      "settings": {
+        "foreground": "#5C6370"
       }
-    ]
-  }
+    },
+    {
+      "scope": ["string", "punctuation.definition.string"],
+      "settings": {
+        "foreground": "#98C379"
+      }
+    },
+    {
+      "scope": ["keyword", "storage.type", "storage.modifier"],
+      "settings": {
+        "foreground": "#C678DD"
+      }
+    },
+    {
+      "scope": ["entity.name.function", "support.function"],
+      "settings": {
+        "foreground": "#61AFEF"
+      }
+    },
+    {
+      "scope": ["variable", "support.variable"],
+      "settings": {
+        "foreground": "#E06C75"
+      }
+    },
+    {
+      "scope": ["constant.numeric"],
+      "settings": {
+        "foreground": "#D19A66"
+      }
+    },
+    {
+      "scope": ["entity.name.tag", "punctuation.definition.tag"],
+      "settings": {
+        "foreground": "#E06C75"
+      }
+    },
+    {
+      "scope": ["entity.other.attribute-name"],
+      "settings": {
+        "foreground": "#D19A66"
+      }
+    }
+  ]
+}

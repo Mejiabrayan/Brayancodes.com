@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
   const [status, setStatus] = useState<
-    'idle' | 'sending' | 'success' | 'error'
-  >('idle');
-  const [buttonText, setButtonText] = useState('Send Message');
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [buttonText, setButtonText] = useState("Send Message");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -23,99 +23,93 @@ const ContactForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus('sending');
-    setButtonText('Sending...');
+    setStatus("sending");
+    setButtonText("Sending...");
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        setStatus('success');
-        setButtonText('Successful');
-        setFormData({ name: '', email: '', message: '' });
+        setStatus("success");
+        setButtonText("Successful");
+        setFormData({ name: "", email: "", message: "" });
       } else {
-        setStatus('error');
-        setButtonText('Failed');
+        setStatus("error");
+        setButtonText("Failed");
       }
     } catch (error) {
-      setStatus('error');
-      setButtonText('Failed');
+      setStatus("error");
+      setButtonText("Failed");
     }
   };
 
   useEffect(() => {
-    if (status === 'success' || status === 'error') {
+    if (status === "success" || status === "error") {
       const timer = setTimeout(() => {
-        setStatus('idle');
-        setButtonText('Send Message');
+        setStatus("idle");
+        setButtonText("Send Message");
       }, 3000);
       return () => clearTimeout(timer);
     }
   }, [status]);
 
   return (
-    <form onSubmit={handleSubmit} className='w-full max-w-md'>
-      <div className='mb-4'>
-        <label htmlFor='name' className='block text-accents-6 mb-2'>
+    <form onSubmit={handleSubmit} className="w-full max-w-md">
+      <div className="mb-4">
+        <label htmlFor="name" className="text-accents-6 mb-2 block">
           Name
         </label>
         <input
-          type='text'
-          id='name'
-          name='name'
+          type="text"
+          id="name"
+          name="name"
           value={formData.name}
           onChange={handleChange}
           required
-          className='w-full p-2 text-accents-8 focus:outline-none focus:border-blue-700'
+          className="text-accents-8 w-full p-2 focus:border-blue-700 focus:outline-none"
         />
       </div>
-      <div className='mb-4'>
-        <label htmlFor='email' className='block text-accents-6 mb-2'>
+      <div className="mb-4">
+        <label htmlFor="email" className="text-accents-6 mb-2 block">
           Email
         </label>
         <input
-          type='email'
-          id='email'
-          name='email'
+          type="email"
+          id="email"
+          name="email"
           value={formData.email}
           onChange={handleChange}
           required
-          className='w-full p-2 text-accents-8 focus:outline-none focus:border-blue-700'
+          className="text-accents-8 w-full p-2 focus:border-blue-700 focus:outline-none"
         />
       </div>
-      <div className='mb-4'>
-        <label htmlFor='message' className='block text-accents-6 mb-2'>
+      <div className="mb-4">
+        <label htmlFor="message" className="text-accents-6 mb-2 block">
           Message
         </label>
         <textarea
-          id='message'
-          name='message'
+          id="message"
+          name="message"
           rows={4}
           value={formData.message}
           onChange={handleChange}
           required
-          className='w-full p-2 text-accents-8 focus:outline-none focus:border-blue-700'
+          className="text-accents-8 w-full p-2 focus:border-blue-700 focus:outline-none"
         ></textarea>
       </div>
       <button
         type="submit"
-        disabled={status === 'sending'}
-        className={`w-full p-2 rounded transition duration-300 border border-white/10
-          ${status === 'sending' ? 'cursor-not-allowed' : 'hover:bg-white/5'}
-          ${status === 'success' ? 'text-accents-6' : ''}
-          ${status === 'error' ? 'text-red-500' : ''}
-          ${status === 'idle' || status === 'sending' ? 'text-accents-6' : ''}`}
+        disabled={status === "sending"}
+        className={`w-full rounded border border-white/10 p-2 transition duration-300 ${status === "sending" ? "cursor-not-allowed" : "hover:bg-white/5"} ${status === "success" ? "text-accents-6" : ""} ${status === "error" ? "text-red-500" : ""} ${status === "idle" || status === "sending" ? "text-accents-6" : ""}`}
       >
         <div className="shimmer">
-          <div className="mask">
-            {buttonText}
-          </div>
+          <div className="mask">{buttonText}</div>
         </div>
       </button>
     </form>

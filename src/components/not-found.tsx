@@ -1,18 +1,18 @@
-import { useRef } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
+import { useRef } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import {
   AsciiRenderer,
   Center,
   OrbitControls,
   Float,
   PerspectiveCamera,
-  Text
-} from '@react-three/drei';
-import { Mesh } from 'three';
+  Text,
+} from "@react-three/drei";
+import { Mesh } from "three";
 
 type ASCIIProps = { text?: string };
 
-function CustomText({ text = '404' }: ASCIIProps) {
+function CustomText({ text = "404" }: ASCIIProps) {
   const ref = useRef<Mesh>(null!);
   const viewport = useThree((state) => state.viewport);
 
@@ -32,7 +32,11 @@ function CustomText({ text = '404' }: ASCIIProps) {
             textAlign="center"
           >
             {text}
-            <meshStandardMaterial color='white' roughness={0.2} metalness={0.8} />
+            <meshStandardMaterial
+              color="white"
+              roughness={0.2}
+              metalness={0.8}
+            />
           </Text>
         </mesh>
       </Float>
@@ -40,11 +44,11 @@ function CustomText({ text = '404' }: ASCIIProps) {
   );
 }
 
-export default function ASCIIText({ text = '404 Page Not Found' }: ASCIIProps) {
+export default function ASCIIText({ text = "404 Page Not Found" }: ASCIIProps) {
   return (
-    <div style={{ width: '100%', height: '70vh' }}>
+    <div style={{ width: "100%", height: "70vh" }}>
       <Canvas shadows>
-        <color attach='background' args={['black']} />
+        <color attach="background" args={["black"]} />
         <PerspectiveCamera makeDefault position={[0, 0, 8]} />
         <pointLight position={[-10, -10, -10]} />
         <spotLight
@@ -55,9 +59,9 @@ export default function ASCIIText({ text = '404 Page Not Found' }: ASCIIProps) {
         />
         <CustomText text={text} />
         <AsciiRenderer
-          fgColor='white'
-          bgColor='transparent'
-          characters=' .:;=+*▲'
+          fgColor="white"
+          bgColor="transparent"
+          characters=" .:;=+*▲"
         />
         <OrbitControls
           enableZoom={false}

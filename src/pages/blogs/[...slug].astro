@@ -1,17 +1,17 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '~/layouts/Layout.astro';
-import Container from '~/components/container.astro';
-import { Image } from 'astro:assets';
+import { getCollection } from "astro:content";
+import Layout from "~/layouts/Layout.astro";
+import Container from "~/components/container.astro";
+import { Image } from "astro:assets";
 
 const { slug } = Astro.params;
-const blogs = await getCollection('blogs');
+const blogs = await getCollection("blogs");
 const blog = blogs.find((blog) => blog.slug === slug);
 
 if (!blog) {
   return new Response(null, {
     status: 404,
-    statusText: 'Not found'
+    statusText: "Not found",
   });
 }
 
@@ -21,18 +21,20 @@ const { Content } = await blog.render();
 
 <Layout title={`${title} | Brayan M. Cuenca Blog`}>
   <Container>
-    <article class='max-w-sm md:max-w-3xl lg:max-4xl mx-auto'>
+    <article class="lg:max-4xl mx-auto max-w-sm md:max-w-3xl">
       <!-- Header -->
-      <header class='text-center space-y-4 mb-12'>
-        <h1 class='text-4xl font-[Tobias] italic text-neutral-300'>{title}</h1>
-        <p class='text-lg text-neutral-300/90'>{description}</p>
-        <div class="flex items-center justify-center gap-4 text-sm text-neutral-400">
+      <header class="mb-12 space-y-4 text-center">
+        <h1 class="font-[Tobias] text-4xl text-neutral-300 italic">{title}</h1>
+        <p class="text-lg text-neutral-300/90">{description}</p>
+        <div
+          class="flex items-center justify-center gap-4 text-sm text-neutral-400"
+        >
           <time>
             {
-              new Date(date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
+              new Date(date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
               })
             }
           </time>
@@ -43,48 +45,34 @@ const { Content } = await blog.render();
 
       {
         image && (
-          <div class='reflection-wrapper'>
-            <div class='relative isolate aspect-video w-full rounded-lg overflow-hidden'>
+          <div class="reflection-wrapper">
+            <div class="relative isolate aspect-video w-full overflow-hidden rounded-lg">
               <Image
                 src={image}
                 alt={title}
                 width={1000}
                 height={1000}
-                class='w-full h-full object-cover'
-                loading='lazy'
+                class="h-full w-full object-cover"
+                loading="lazy"
               />
             </div>
 
-            <!-- Reflection -->
-            <div class='relative isolate aspect-video w-full overflow-hidden reflection'>
+            <div class="reflection relative isolate aspect-video w-full overflow-hidden">
               <Image
                 src={image}
                 alt={`${title} reflection`}
                 width={1000}
                 height={1000}
-                class='w-full h-[75%] object-cover'
-                loading='lazy'
+                class="h-[75%] w-full object-cover"
+                loading="lazy"
               />
             </div>
           </div>
         )
       }
 
-      <!-- Content -->
       <div
-        class='prose prose-neutral prose-invert max-w-none leading-normal mt-12
-        prose-headings:font-[Tobias] prose-headings:italic
-        prose-h1:text-neutral-300 prose-h1:text-2xl 
-        prose-h2:text-neutral-300 prose-h2:text-xl
-        prose-h3:text-neutral-300 prose-h3:text-lg
-        prose-h4:text-neutral-300 prose-h4:text-base
-        prose-p:text-neutral-300
-        prose-a:text-neutral-300 prose-a:no-underline hover:prose-a:text-neutral-200
-        prose-strong:text-white
-        prose-li:text-neutral-300
-        prose-code:rounded-sm prose-code:border prose-code:border-white/10
-        prose-code:bg-transparent prose-code:text-neutral-300 prose-code:px-1
-        prose-ul:text-neutral-300'
+        class="prose prose-neutral prose-invert prose-headings:font-[Tobias] prose-headings:italic prose-h1:text-neutral-300 prose-h1:text-2xl prose-h2:text-neutral-300 prose-h2:text-xl prose-h3:text-neutral-300 prose-h3:text-lg prose-h4:text-neutral-300 prose-h4:text-base prose-p:text-neutral-300 prose-a:text-neutral-300 prose-a:no-underline hover:prose-a:text-neutral-200 prose-strong:text-white prose-li:text-neutral-300 prose-code:rounded-sm prose-code:border prose-code:border-white/10 prose-code:bg-transparent prose-code:text-neutral-300 prose-code:px-1 prose-ul:text-neutral-300 mt-12 max-w-none leading-normal"
       >
         <Content />
       </div>
@@ -94,15 +82,15 @@ const { Content } = await blog.render();
 
 <script is:inline define:vars={{ slug }}>
   // Increment view count
-  fetch(`/api/blogs/${slug}`, { method: 'POST' })
-    .then(res => res.json())
-    .then(data => {
+  fetch(`/api/blogs/${slug}`, { method: "POST" })
+    .then((res) => res.json())
+    .then((data) => {
       if (data.views) {
-        document.getElementById('viewCount').textContent = 
+        document.getElementById("viewCount").textContent =
           `${data.views.toLocaleString()} views`;
       }
     })
-    .catch(err => console.error('Failed to update views:', err));
+    .catch((err) => console.error("Failed to update views:", err));
 </script>
 
 <style>

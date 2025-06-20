@@ -1,43 +1,43 @@
 // View Transition Animations
 export const slideInFromRight = {
   old: {
-    name: 'slideOut',
-    duration: '0.3s',
-    easing: 'ease-out',
-    fillMode: 'forwards',
+    name: "slideOut",
+    duration: "0.3s",
+    easing: "ease-out",
+    fillMode: "forwards",
   },
   new: {
-    name: 'slideIn',
-    duration: '0.3s',
-    easing: 'ease-out',
-    fillMode: 'backwards',
+    name: "slideIn",
+    duration: "0.3s",
+    easing: "ease-out",
+    fillMode: "backwards",
   },
 };
 
 export const fadeInOut = {
   old: {
-    name: 'fadeOut',
-    duration: '0.3s',
-    easing: 'ease-out',
-    fillMode: 'forwards',
+    name: "fadeOut",
+    duration: "0.3s",
+    easing: "ease-out",
+    fillMode: "forwards",
   },
   new: {
-    name: 'fadeIn',
-    duration: '0.3s',
-    easing: 'ease-out',
-    fillMode: 'backwards',
+    name: "fadeIn",
+    duration: "0.3s",
+    easing: "ease-out",
+    fillMode: "backwards",
   },
 };
 
 // Keyframe Animations
 export const keyframes = {
   slideIn: {
-    from: { transform: 'translateX(100%)', opacity: 0 },
-    to: { transform: 'translateX(0)', opacity: 1 },
+    from: { transform: "translateX(100%)", opacity: 0 },
+    to: { transform: "translateX(0)", opacity: 1 },
   },
   slideOut: {
-    from: { transform: 'translateX(0)', opacity: 1 },
-    to: { transform: 'translateX(-100%)', opacity: 0 },
+    from: { transform: "translateX(0)", opacity: 1 },
+    to: { transform: "translateX(-100%)", opacity: 0 },
   },
   fadeIn: {
     from: { opacity: 0 },
@@ -51,14 +51,14 @@ export const keyframes = {
 // Gradient Animations
 export const gradients = {
   color: {
-    blob: 'radial-gradient(circle at center, oklch(90.67 0 0), transparent 30%)',
-    blur: 'blur(100px)',
+    blob: "radial-gradient(circle at center, oklch(90.67 0 0), transparent 30%)",
+    blur: "blur(100px)",
   },
 } as const;
 
 // Menu Animations
 export const menuTransition = {
-  type: 'spring',
+  type: "spring",
   bounce: 0.3,
   duration: 0.4,
   damping: 20,
@@ -86,7 +86,7 @@ export const menuAnimations = {
       opacity: 1,
       scale: 1,
       transition: {
-        type: 'spring',
+        type: "spring",
         stiffness: 400,
         damping: 25,
       },
@@ -96,7 +96,7 @@ export const menuAnimations = {
       opacity: 0,
       scale: 0.9,
       transition: {
-        type: 'spring',
+        type: "spring",
         stiffness: 400,
         damping: 25,
       },

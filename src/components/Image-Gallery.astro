@@ -1,37 +1,46 @@
 ---
-import { Image } from 'astro:assets';
-import img1 from '@/assets/img1.jpeg';
-import img2 from '@/assets/img2.jpeg';
-import img3 from '@/assets/img3.jpeg';
-import img4 from '@/assets/img4.jpeg';
-import img5 from '@/assets/img5.jpeg';
-import img6 from '@/assets/img6.jpg';
+import { Image } from "astro:assets";
+import img1 from "@/assets/img1.jpeg";
+import img2 from "@/assets/img2.jpeg";
+import img3 from "@/assets/img3.jpeg";
+import img4 from "@/assets/img4.jpeg";
+import img5 from "@/assets/img5.jpeg";
+import img6 from "@/assets/img6.jpg";
 
 const images = [
-  { src: img1, alt: 'Image 1', class: 'col-span-2 row-span-2' },
-  { src: img2, alt: 'Image 2', class: 'col-span-1 row-span-1' },
-  { src: img3, alt: 'Image 3', class: 'col-span-1 row-span-2' },
-  { src: img4, alt: 'Image 4', class: 'col-span-1 row-span-1' },
-  { src: img5, alt: 'Image 5', class: 'col-span-2 row-span-1' },
-  { src: img6, alt: 'Image 6', class: 'col-span-1 row-span-1' },
+  { src: img1, alt: "Image 1", class: "col-span-2 row-span-2" },
+  { src: img2, alt: "Image 2", class: "col-span-1 row-span-1" },
+  { src: img3, alt: "Image 3", class: "col-span-1 row-span-2" },
+  { src: img4, alt: "Image 4", class: "col-span-1 row-span-1" },
+  { src: img5, alt: "Image 5", class: "col-span-2 row-span-1" },
+  { src: img6, alt: "Image 6", class: "col-span-1 row-span-1" },
 ];
 ---
 
-<div class="grid grid-cols-1 sm:grid-cols-2  bg-black  lg:grid-cols-3 gap-4 p-4 border border-white/10 rounded-2xl">
-  {images.map((image, index) => (
-    <div class={`relative md:h-64 lg:h-64 h-28  ${
-      index === 0 ? 'sm:col-span-2 sm:row-span-2' :
-      index === 2 ? 'sm:row-span-2' :
-      index === 4 ? 'sm:col-span-2' :
-      ''
-    } `}>
-      <Image
-        src={image.src}
-        alt={image.alt}
-        class="absolute inset-0 w-full h-full object-cover z-0 grayscale rounded-2xl"
-        format="webp"
-      />
-      <div class="absolute inset-0 z-10 bg-[radial-gradient(transparent_0.5px,#000_0.5px)] [background-size:3px_3px] opacity-55 mix-blend-overlay " />
-    </div>
-  ))}
+<div
+  class="grid grid-cols-1 gap-4 rounded-2xl border border-white/10 bg-black p-4 sm:grid-cols-2 lg:grid-cols-3"
+>
+  {
+    images.map((image, index) => (
+      <div
+        class={`relative h-28 md:h-64 lg:h-64 ${
+          index === 0
+            ? "sm:col-span-2 sm:row-span-2"
+            : index === 2
+              ? "sm:row-span-2"
+              : index === 4
+                ? "sm:col-span-2"
+                : ""
+        } `}
+      >
+        <Image
+          src={image.src}
+          alt={image.alt}
+          class="absolute inset-0 z-0 h-full w-full rounded-2xl object-cover grayscale"
+          format="webp"
+        />
+        <div class="absolute inset-0 z-10 bg-[radial-gradient(transparent_0.5px,#000_0.5px)] bg-size-[3px_3px] opacity-55 mix-blend-overlay" />
+      </div>
+    ))
+  }
 </div>

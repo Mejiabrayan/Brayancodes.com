@@ -1,9 +1,9 @@
 ---
-title: 'Galleria'
-link: 'https://github.com/Mejiabrayan/galleria'
-overview: 'Galleria is a photo management platform designed to optimize and streamline the handling of digital assets.'
+title: "Galleria"
+link: "https://github.com/Mejiabrayan/galleria"
+overview: "Galleria is a photo management platform designed to optimize and streamline the handling of digital assets."
 date: 2024-05-10
-cover: '/assets/galleria.webp'
+cover: "/assets/galleria.webp"
 ---
 
 Galleria is a photo management platform designed to optimize and streamline the handling of digital assets. Built with a focus on performance and user experience, Galleria leverages advanced technologies to provide seamless media upload, storage, and retrieval capabilities.

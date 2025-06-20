@@ -24,18 +24,17 @@ This is the personal website and portfolio of Brayan Mejia Cuenca, a Full-Stack 
 ## Setup and Installation
 
 1. Clone the repository:
-git clone https://github.com/Mejiabrayan/mejiabrayan.dev
+   git clone https://github.com/Mejiabrayan/mejiabrayan.dev
 
 2. Install dependencies:
-pnpm install
+   pnpm install
 
 3. Run the development server:
-pnpm run dev
+   pnpm run dev
 
 4. Build for production:
-pnpm run build
+   pnpm run build
 
 ## Deployment
 
 This site is configured for deployment on [Vercel](https://vercel.com/).
-

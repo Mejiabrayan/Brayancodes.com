@@ -1,16 +1,16 @@
 ---
-title: 'Creating a Halftone Effect Using Tailwind CSS'
+title: "Creating a Halftone Effect Using Tailwind CSS"
 author: Brayan Mejia Cuenca
 description: "Learn how to create a captivating halftone effect..."
 date: 2024-08-01
-image: '/dither-effect.png'
-tags: ['Tailwind CSS', 'CSS Effects', 'Web Design']
+image: "/dither-effect.png"
+tags: ["Tailwind CSS", "CSS Effects", "Web Design"]
 ---
 
-import DitherDemo from '~/components/halftone-demo';
-import ColorPicker from '~/components/color-picker';
-import Callout from '~/components/callout.astro';
-import TipBox from '~/components/tipbox'; 
+import DitherDemo from "~/components/halftone-demo";
+import ColorPicker from "~/components/color-picker";
+import Callout from "~/components/callout.astro";
+import TipBox from "~/components/tipbox";
 
 In this tutorial, we'll explore how to achieve a striking halftone effect by overlaying a radial gradient pattern on top of an image using Tailwind CSS. This technique adds a textured, dot-matrix look to your images, bringing a unique visual flair to your web projects.
 
@@ -19,7 +19,9 @@ In this tutorial, we'll explore how to achieve a striking halftone effect by ove
 Before we dive in, let's briefly explain what a halftone effect is. Halftoning is a reprographic technique that simulates continuous tone imagery through the use of dots, varying either in size, spacing, or pattern. Traditionally used in printing when full-color reproduction wasn't possible, it's now often used as a creative design element to add texture and visual interest to digital images.
 
 <Callout type="info">
-  Halftone patterns were originally used in newspaper printing and early photography to reproduce images using dots of varying sizes. Today, we're using it as a creative effect in web design!
+  Halftone patterns were originally used in newspaper printing and early
+  photography to reproduce images using dots of varying sizes. Today, we're
+  using it as a creative effect in web design!
 </Callout>
 
 ## Interactive Halftone Effect Demo
@@ -35,8 +37,8 @@ Try adjusting the settings below to see how they affect the halftone pattern:
 First, ensure you have a project set up with Tailwind CSS. If you haven't already, follow the [Tailwind CSS installation guide](https://tailwindcss.com/docs/installation) to get started.
 
 <TipBox>
-  If you're using Astro, you can easily add Tailwind CSS to your project using the following command:
-  `npx astro add tailwind`
+  If you're using Astro, you can easily add Tailwind CSS to your project using
+  the following command: `npx astro add tailwind`
 </TipBox>
 
 ### 2. HTML Structure
@@ -44,16 +46,15 @@ First, ensure you have a project set up with Tailwind CSS. If you haven't alread
 Create a section in your HTML where you want to apply the halftone effect. Here's the basic structure:
 
 ```html
-<section class="relative space-y-6 mt-6 mb-8 isolate">
+<section class="relative isolate mt-6 mb-8 space-y-6">
   <img
     src="/path/to/your/image.jpg"
     alt="Foreground Image"
-    class="absolute inset-0 w-full h-full object-cover z-0"
+    class="absolute inset-0 z-0 h-full w-full object-cover"
   />
   <div
-    class="relative z-10 bg-[radial-gradient(transparent_1px,#000_0.5px)] [background-size:3px_3px] opacity-50 mix-blend-overlay h-full"
-  >
-  </div>
+    class="relative z-10 h-full bg-[radial-gradient(transparent_1px,#000_0.5px)] bg-size-[3px_3px] opacity-50 mix-blend-overlay"
+  ></div>
 </section>
 ```
 
@@ -62,36 +63,42 @@ Create a section in your HTML where you want to apply the halftone effect. Here'
 Let's break down the key components of our HTML and CSS:
 
 #### Section Container
+
 ```html
-<section class="relative space-y-6 mt-6 mb-8 isolate">
+<section class="relative isolate mt-6 mb-8 space-y-6"></section>
 ```
+
 - `relative`: Establishes a positioning context for child elements.
 - `space-y-6`: Adds vertical spacing between child elements.
 - `mt-6 mb-8`: Adjusts top and bottom margins.
 - `isolate`: Ensures the z-index of its children is isolated from other elements.
 
 #### Background Image
+
 ```html
 <img
   src="/path/to/your/image.jpg"
   alt="Foreground Image"
-  class="absolute inset-0 w-full h-full object-cover z-0"
+  class="absolute inset-0 z-0 h-full w-full object-cover"
 />
 ```
+
 - `absolute inset-0`: Positions the image to cover the entire section.
 - `w-full h-full`: Ensures the image takes up the full width and height.
 - `object-cover`: Maintains aspect ratio while filling the container.
 - `z-0`: Places the image at the lowest z-index.
 
 #### Halftone Pattern Overlay
+
 ```html
 <div
-  class="relative z-10 bg-[radial-gradient(transparent_1px,#000_0.5px)] [background-size:3px_3px] opacity-50 mix-blend-overlay h-full"
->
+  class="relative z-10 h-full bg-[radial-gradient(transparent_1px,#000_0.5px)] bg-size-[3px_3px] opacity-50 mix-blend-overlay"
+></div>
 ```
+
 - `relative z-10`: Positions the overlay above the image.
 - `bg-[radial-gradient(...)]`: Creates the halftone effect using a radial gradient.
-- `[background-size:3px_3px]`: Sets the size of the dot pattern.
+- `bg-size-[3px_3px]`: Sets the size of the dot pattern.
 - `opacity-50`: Controls the intensity of the effect.
 - `mix-blend-overlay`: Blends the pattern with the underlying image.
 - `h-full`: Ensures the overlay covers the entire height.
@@ -100,13 +107,18 @@ Let's break down the key components of our HTML and CSS:
 
 You can easily customize the halftone effect by adjusting a few parameters:
 
-1. **Pattern Size**: Change `[background-size:3px_3px]` to increase or decrease the size of the halftone dots.
+1. **Pattern Size**: Change `bg-size-[3px_3px]` to increase or decrease the size of the halftone dots.
 2. **Opacity**: Modify `opacity-50` to make the effect more or less pronounced.
 3. **Dot Colors**: Adjust `bg-[radial-gradient(transparent_1px,#000_0.5px)]` to use different colors or transparency levels.
 4. **Blend Mode**: Experiment with different blend modes like `mix-blend-multiply` or `mix-blend-screen` for varied effects.
 
-<ColorPicker defaultColor="#000000" onChange={(color) => console.log(`Selected color: ${color}`)} client:load />
-Use the color picker above to choose a color for your halftone pattern. You can then use this color in your radial gradient.
+<ColorPicker
+  defaultColor="#000000"
+  onChange={(color) => console.log(`Selected color: ${color}`)}
+  client:load
+/>
+Use the color picker above to choose a color for your halftone pattern. You can
+then use this color in your radial gradient.
 
 ## Conclusion
 
